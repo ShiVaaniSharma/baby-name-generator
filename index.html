@@ -1,0 +1,255 @@
+<!DOCTYPE html><html class="light" lang="en" style="scroll-behavior: smooth;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Naam &amp; Banao - Baby Name Generator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&amp;family=Quicksand:wght@600;700&amp;family=Fraunces:opsz,wght@9..144,300..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        'brand-teal': '#286b59',
+                        'brand-text': '#2c5f53',
+                        'brand-gray': '#5e6865',
+                        "primary": "#28695c",
+                        "secondary": "#30628a",
+                        "background": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "on-surface-variant": "#3f4946",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e4e2e1"
+                    },
+                    "fontFamily": {
+                        "sans": ['Outfit', 'sans-serif'],
+                        "serif": ['Fraunces', 'serif'],
+                        "headline-md": ["Quicksand"],
+                        "label-bold": ["Nunito Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); -webkit-font-smoothing: antialiased; }
+        
+        #nb-generate-form { scroll-margin-top: 72px; }
+
+        /* Unique Prefixes for your custom classes */
+        .nb-ambient-shadow { box-shadow: 0 15px 30px rgba(51,51,51,0.08); }
+        .nb-hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .nb-hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(51,51,51,0.12); }
+        .nb-squishy-btn { transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .nb-squishy-btn:active { transform: scale(0.95); }
+        .nb-glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07); }
+        .nb-bg-hero-gradient-blur { position: relative; background: linear-gradient(135deg, rgba(224, 242, 241, 0.8) 0%, rgba(254, 243, 199, 0.8) 30%, rgba(252, 228, 236, 0.8) 70%, rgba(204, 251, 241, 0.8) 100%); }
+        .nb-bg-hero-gradient-blur::before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: inherit; filter: blur(40px); z-index: -1; }
+        
+        .nb-toggle-checkbox:checked + .nb-toggle-label { background-color: theme('colors.secondary'); }
+        .nb-toggle-checkbox:checked + .nb-toggle-label:after { transform: translateX(100%); }
+        .nb-toggle-label { width: 48px; height: 24px; background-color: theme('colors.surface-container-highest'); border-radius: 9999px; position: relative; cursor: pointer; transition: background-color 0.2s ease; }
+        .nb-toggle-label:after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background-color: white; border-radius: 50%; transition: transform 0.2s ease; }
+        
+        #nb-mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.2s; max-height: 0; overflow: hidden; opacity: 0; }
+        #nb-mobile-menu.active { max-height: 500px; opacity: 1; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="pt-20 pb-0 flex flex-col min-h-screen">
+
+<!-- TopNavBar -->
+<nav class="bg-surface/90 fixed top-0 w-full z-[100] shadow-sm backdrop-blur-md border-b border-white/20">
+<div class="flex justify-between items-center px-6 py-5 max-w-7xl mx-auto">
+    <img src="logo1.png" alt="Naam & Banao Logo" class="h-10 w-auto object-contain">
+<div class="hidden sm:flex gap-8 items-center">
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-label-bold" href="#nb-generate-form">Generate</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="explore.html">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="#">Favorites</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="about.html">About Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="#">Blogs</a>
+<button id="nb-hamburger-btn" class="sm:hidden text-primary p-2"><span class="material-symbols-outlined text-3xl">menu</span></button>
+</div>
+</div>
+<div id="nb-mobile-menu" class="sm:hidden bg-white flex flex-col px-6 py-4 gap-4">
+<a class="text-primary font-bold" href="#nb-generate-form">Generate</a>
+<a class="text-on-surface-variant" href="explore.html">Explore</a>
+<a class="text-on-surface-variant" href="about.html">About Us</a>
+</div>
+</nav>
+
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="nb-bg-hero-gradient-blur relative flex items-center pt-10 pb-20 px-8 md:px-16 lg:px-24">
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="flex flex-col items-start space-y-8 max-w-xl lg:col-span-5">
+    <p class="text-sm md:text-base font-sans font-bold uppercase tracking-[0.3em] text-brand-teal mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined text-sm">auto_awesome</span> Ai Powered Baby Name Maker
+</p>
+
+    <!-- Shadow Preserved Exactly -->
+    <h1 style="color: #067a53; text-shadow: 2px 4px 10px rgba(23, 118, 72, 0.966);" class="text-5xl font-headline-md md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-4 tracking-wide ">
+        Find a name they'll carry forever.
+    </h1>
+
+    <p class="text-xl font-sans text-brand-gray leading-relaxed max-w-md tracking-widest">
+        Discover names that carry meaning, history, and a touch of magic. Let's start the journey together.
+    </p>
+
+    <a href="#nb-generate-form" class="bg-brand-teal hover:bg-[#1e5445] text-white font-medium py-4 px-8 rounded-full flex items-center space-x-3 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200 nb-squishy-btn">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5z"/>
+        </svg>
+        <span class="text-lg font-bold">Generate Names</span>
+    </a>
+
+</div>
+<div class="flex justify-center w-full lg:col-span-6 lg:col-start-7"><img class="w-full max-w-lg lg:max-w-xl h-auto object-cover rounded-2xl shadow-xl" src="heroimg2.png"></div>
+</div>
+</section>
+
+<!-- Mixer Section -->
+
+
+
+
+<!-- Mixer Section (Modified ONLY to add IDs for the API) -->
+<section id="nb-generate-form" class="px-6 pb-24 pt-12 relative -mt-8 z-20">
+<div class="max-w-7xl mx-auto relative">
+<div class="text-center mb-12 space-y-4"><h2 class="font-headline-md text-[32px] text-primary">Tell us a little more about them</h2><p class="font-body-md text-on-surface-variant text-lg">Create a unique name by mixing yours.</p></div>
+<div class="max-w-3xl mx-auto nb-glass-panel rounded-3xl p-8 md:p-12 nb-hover-lift relative overflow-hidden border border-gray-200 shadow-xl">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-200 via-blue-200 to-amber-200 opacity-60"></div>
+<form id="nb-generator-form-logic" class="space-y-10 relative z-10">
+<div class="space-y-4">
+<label class="block font-label-bold text-on-surface-variant text-center">I'm looking for a...</label>
+<div class="flex gap-4 p-1.5 bg-gray-100 rounded-full max-w-md mx-auto">
+<label class="flex-1 cursor-pointer"><input checked="" class="peer sr-only" name="mixer-gender" type="radio" value="Girl"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Girl</div></label>
+<label class="flex-1 cursor-pointer"><input class="peer sr-only" name="mixer-gender" type="radio" value="Boy"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Boy</div></label>
+<label class="flex-1 cursor-pointer"><input class="peer sr-only" name="mixer-gender" type="radio" value="Any"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Any</div></label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Origin / Type</label>
+<select id="nb-origin-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 appearance-none cursor-pointer"><option value="Any">Any Origin</option><option value="Hindu">Hindu</option><option value="Muslim">Muslim</option><option value="Sikh">Sikh</option><option value="Christian">Christian</option></select></div>
+<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Style</label>
+<select id="nb-style-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 appearance-none cursor-pointer"><option value="Any">Any Style</option><option value="Unique">Unique</option><option value="Traditional">Traditional</option><option value="Classic">Classic</option><option value="Modern">Modern</option></select></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Desired Meaning</label><input id="nb-meaning-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40" placeholder="e.g. Brave, Peaceful, Light" type="text"></div>
+<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">First Letter</label><input id="nb-letter-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 text-center" maxlength="1" placeholder="A-Z" type="text"></div>
+</div>
+<div class="bg-white/40 p-6 rounded-3xl border border-white/60 space-y-6">
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><label class="font-headline-md text-xl text-on-surface">Blend Parent Names?</label></div><div class="relative inline-block w-12 mr-2 select-none"><input class="nb-toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" id="blend-toggle" type="checkbox"><label class="nb-toggle-label block h-6 rounded-full bg-gray-300 cursor-pointer" for="blend-toggle"></label></div></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+<input id="nb-parent1-input" class="w-full rounded-2xl border-0 bg-white/90 px-6 py-4 shadow-sm" placeholder="Parent 1 Name" type="text">
+<input id="nb-parent2-input" class="w-full rounded-2xl border-0 bg-white/90 px-6 py-4 shadow-sm" placeholder="Parent 2 Name" type="text">
+</div>
+</div>
+<button id="nb-generate-btn" class="w-full bg-secondary text-white py-5 rounded-full font-label-bold text-xl nb-hover-lift nb-squishy-btn shadow-lg" type="submit">Discover Names</button>
+</form>
+
+<!-- NEW: RESULTS AREA (Hidden by default, matches your design) -->
+<div id="nb-results-section" class="hidden mt-12 pt-10 border-t border-gray-100">
+    <h3 class="font-headline-md text-2xl text-primary mb-6 text-center">Suggestions for You</h3>
+    <div id="nb-results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Cards will appear here -->
+    </div>
+</div>
+
+</div></div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Trending Names -->
+<section class="px-6 py-24 bg-gradient-to-b bg-gray-100 from-surface to-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline-md text-3xl text-primary mb-10">Trending Names</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="bg-white rounded-3xl p-8 nb-ambient-shadow nb-hover-lift border border-gray-100"><div class="font-headline-md text-2xl text-on-surface mb-2">Eleanor</div><div class="font-body-md text-gray-500 mb-6 italic">"Shining light"</div><div class="flex gap-2"><span class="bg-teal-50 text-primary px-3 py-1.5 rounded-full text-xs font-label-bold">Greek</span></div></div>
+<div class="bg-white rounded-3xl p-8 nb-ambient-shadow nb-hover-lift border border-gray-100"><div class="font-headline-md text-2xl text-on-surface mb-2">Silas</div><div class="font-body-md text-gray-500 mb-6 italic">"Of the forest"</div><div class="flex gap-2"><span class="bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full text-xs font-label-bold">Latin</span></div></div>
+<div class="bg-white rounded-3xl p-8 nb-ambient-shadow nb-hover-lift border border-gray-100"><div class="font-headline-md text-2xl text-on-surface mb-2">Maeve</div><div class="font-body-md text-gray-500 mb-6 italic">"Intoxicating"</div><div class="flex gap-2"><span class="bg-teal-50 text-primary px-3 py-1.5 rounded-full text-xs font-label-bold">Irish</span></div></div>
+<div class="bg-white rounded-3xl p-8 nb-ambient-shadow nb-hover-lift border border-gray-100"><div class="font-headline-md text-2xl text-on-surface mb-2">Felix</div><div class="font-body-md text-gray-500 mb-6 italic">"Lucky"</div><div class="flex gap-2"><span class="bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full text-xs font-label-bold">Latin</span></div></div>
+</div></div></section>
+
+<!-- Quick Explore -->
+<section class="px-6 py-20 bg-surface">
+<div class="max-w-7xl mx-auto text-center"><h2 class="font-headline-md text-[32px] text-primary mb-12">Quick Explore</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">star</span><span class="font-label-bold">Popular Indian Names</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">menu_book</span><span class="font-label-bold">Names by Meaning</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">brightness_4</span><span class="font-label-bold">Names by Rashi</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">auto_awesome</span><span class="font-label-bold">Names by Nakshatra</span></a>
+</div>
+<a href="explore.html" class="inline-flex items-center gap-2 bg-secondary/10 text-secondary hover:bg-secondary hover:text-white px-8 py-4 rounded-full font-label-bold transition-all nb-hover-lift">
+    View All Categories <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div></section>
+
+<!-- Final CTA -->
+<section class="px-6 py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-teal-100/50"></div><div class="max-w-4xl mx-auto relative z-10 text-center space-y-8 nb-glass-panel p-12 rounded-[3rem] border-white/60">
+<h2 class="font-headline-md text-4xl text-primary font-bold">Start Your Journey Today</h2>
+<p class="font-body-lg text-gray-500 text-xl font-sans leading-relaxed">Discover thousands of beautiful names and find the perfect fit for your family.</p>
+<a href="#nb-generate-form" class="bg-primary text-white py-4 px-10 rounded-full font-label-bold text-xl nb-hover-lift nb-squishy-btn inline-flex items-center gap-2">Generate Now <span class="material-symbols-outlined">arrow_forward</span></a>
+</div></section>
+
+<footer class="bg-gray-100 w-full rounded-t-xl mt-8">
+<div class="flex flex-col md:flex-row justify-between items-center px-6 py-8 max-w-7xl mx-auto">
+<div class="font-headline-md text-primary text-xl">Lullaby &amp; Letter</div>
+<div class="flex gap-8"><a class="text-gray-500 hover:text-secondary font-label-bold" href="about.html">About Us</a><a class="text-gray-500 hover:text-secondary font-label-bold" href="explore.html">Explore</a><a class="text-gray-500 hover:text-secondary font-label-bold" href="#">Instagram</a></div>
+<div class="font-body-md text-gray-400">© 2024 Lullaby &amp; Letter</div>
+</div></footer>
+</main>
+
+<script>
+    const nbBtn = document.getElementById('nb-hamburger-btn');
+    const nbMenu = document.getElementById('nb-mobile-menu');
+    nbBtn.addEventListener('click', () => {
+        nbMenu.classList.toggle('active');
+        nbBtn.querySelector('span').textContent = nbMenu.classList.contains('active') ? 'close' : 'menu';
+    });
+
+
+
+
+
+
+
+    
+/**
+ * NAAM & BANAO - API LOGIC
+ * Using Gemini 1.5 Flash (Free Tier)
+ */
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
