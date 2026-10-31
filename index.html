@@ -1,43 +1,42 @@
-<!DOCTYPE html><html class="light" lang="en" style="scroll-behavior: smooth;"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Naam &amp; Banao - Baby Name Generator</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&amp;family=Quicksand:wght@600;700&amp;family=Fraunces:opsz,wght@9..144,300..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
+<!DOCTYPE html>
+<html class="light" lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Naam & Banao - Baby Name Generator</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Quicksand:wght@600;700&family=Fraunces:opsz,wght@9..144,300..900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        'brand-teal': '#286b59',
-                        'brand-text': '#2c5f53',
-                        'brand-gray': '#5e6865',
-                        "primary": "#28695c",
-                        "secondary": "#30628a",
-                        "background": "#fbf9f8",
-                        "on-background": "#1b1c1c",
-                        "on-surface-variant": "#3f4946",
-                        "surface-container-low": "#f6f3f2",
-                        "surface-container-highest": "#e4e2e1"
+                        'brand-teal': '#286b59', 'brand-text': '#2c5f53', 'brand-gray': '#5e6865', 'brand-dark': '#1a4731',
+                        "primary": "#28695c", "secondary": "#30628a", "background": "#fbf9f8", "on-background": "#1b1c1c",
+                        "on-surface-variant": "#3f4946", "surface-container-low": "#f6f3f2", "surface-container-highest": "#e4e2e1",
+                        'surface': '#fbf9f8', 'ks-primary': '#28695c', 'ks-secondary': '#30628a', 'ks-surface': '#fbf9f8', 'ks-dark': '#1a4731'
                     },
                     "fontFamily": {
-                        "sans": ['Outfit', 'sans-serif'],
-                        "serif": ['Fraunces', 'serif'],
-                        "headline-md": ["Quicksand"],
-                        "label-bold": ["Nunito Sans"]
+                        "sans": ['Outfit', 'sans-serif'], "serif": ['Fraunces', 'serif'], "headline-md": ["Quicksand"],
+                        "label-bold": ["Nunito Sans"], "ks-sans": ['Outfit', 'sans-serif'], "ks-headline": ["Quicksand"]
                     }
                 }
             }
         }
     </script>
-<style>
-        body { background-color: theme('colors.background'); color: theme('colors.on-background'); -webkit-font-smoothing: antialiased; }
-        
-        #nb-generate-form { scroll-margin-top: 72px; }
 
-        /* Unique Prefixes for your custom classes */
+    <style>
+        /* PAGE ROUTING STYLES */
+        .page-view { display: none; padding-top: 80px; } /* pt-80 added to prevent overlap */
+        .page-view.active { display: block; }
+
+        /* ALL ORIGINAL CSS PRESERVED EXACTLY */
+        body { background-color: #fbf9f8; color: #1b1c1c; -webkit-font-smoothing: antialiased; }
+        #nb-generate-form { scroll-margin-top: 100px; }
         .nb-ambient-shadow { box-shadow: 0 15px 30px rgba(51,51,51,0.08); }
         .nb-hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .nb-hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(51,51,51,0.12); }
@@ -46,119 +45,204 @@
         .nb-glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07); }
         .nb-bg-hero-gradient-blur { position: relative; background: linear-gradient(135deg, rgba(224, 242, 241, 0.8) 0%, rgba(254, 243, 199, 0.8) 30%, rgba(252, 228, 236, 0.8) 70%, rgba(204, 251, 241, 0.8) 100%); }
         .nb-bg-hero-gradient-blur::before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: inherit; filter: blur(40px); z-index: -1; }
-        
-        .nb-toggle-checkbox:checked + .nb-toggle-label { background-color: theme('colors.secondary'); }
+        .nb-toggle-checkbox:checked + .nb-toggle-label { background-color: #30628a; }
         .nb-toggle-checkbox:checked + .nb-toggle-label:after { transform: translateX(100%); }
-        .nb-toggle-label { width: 48px; height: 24px; background-color: theme('colors.surface-container-highest'); border-radius: 9999px; position: relative; cursor: pointer; transition: background-color 0.2s ease; }
+        .nb-toggle-label { width: 48px; height: 24px; background-color: #e4e2e1; border-radius: 9999px; position: relative; cursor: pointer; transition: background-color 0.2s ease; }
         .nb-toggle-label:after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background-color: white; border-radius: 50%; transition: transform 0.2s ease; }
-        
-        #nb-mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.2s; max-height: 0; overflow: hidden; opacity: 0; }
+        #nb-mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.2s; max-height: 0; overflow: hidden; opacity: 0; position: fixed; top: 72px; width: 100%; z-index: 90; }
         #nb-mobile-menu.active { max-height: 500px; opacity: 1; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .ui-nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; color: #5e6865; }
+        .ui-nav-link:hover, .ui-nav-link.active { color: #28695c; }
+        .ui-nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #28695c; transition: width 0.3s; }
+        .ui-nav-link:hover::after, .ui-nav-link.active::after { width: 100%; }
+        .ks-name-card { transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05); background: white; position: relative; }
+        .ks-filter-active { background: #28695c !important; color: white !important; border-color: #28695c !important; }
+        .ks-alpha-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); gap: 4px; }
+        .ks-alpha-btn { height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 10px; font-weight: 700; cursor: pointer; background: white; transition: 0.2s; }
+        .ks-heart-icon.active { color: #ef4444 !important; font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       .sne-scope { --sne-primary: #30628a; --sne-accent: #10b981; --sne-bg: #f8fafc; font-family: 'Outfit', sans-serif; }
+        .sne-card { background: white; border-radius: 2rem; border: 1px solid #eef2f6; box-shadow: 0 20px 40px rgba(0,0,0,0.05); overflow: hidden; padding: 2rem; }
+        .sne-input { width: 100%; border-radius: 12px; border: 1px solid #d1d5db; padding: 12px 16px; font-size: 14px; transition: 0.3s; }
+        .sne-input:focus { outline: none; border-color: var(--sne-primary); ring: 3px; ring-color: rgba(48, 98, 138, 0.1); }
+        
+        /* Premium Result Cards */
+        .sne-result-card { background: #ffffff; border: 1px solid #f1f5f9; border-radius: 16px; padding: 1.25rem; position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .sne-result-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); border-color: var(--sne-primary); }
+        .sne-name-header { display: flex; justify-content: space-between; align-items: center; }
+        .sne-res-name { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0; }
+        .sne-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; letter-spacing: 0.5px; }
+        .sne-tag-origin { background: #eff6ff; color: #3b82f6; }
+        .sne-res-meaning { font-size: 13px; color: #64748b; font-style: italic; line-height: 1.4; border-left: 2px solid #e2e8f0; padding-left: 10px; }
+        
+        .sne-btn-main { background: var(--sne-primary); color: white; border-radius: 12px; padding: 16px; width: 100%; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .sne-btn-main:disabled { background: #cbd5e1; cursor: not-allowed; }
+        
+        /* AI Simulation */
+        .sne-ai-loader { display: none; text-align: center; padding: 3rem 0; }
+        .sne-spinner { width: 48px; height: 48px; border: 4px solid #f3f3f3; border-top: 4px solid var(--sne-primary); border-radius: 50%; animation: sne-spin 1s linear infinite; margin: 0 auto 1rem; }
+        @keyframes sne-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .sne-sync-status { font-size: 11px; font-weight: 700; text-align: center; margin-top: 10px; transition: 0.3s; }
+        .sne-pulse { animation: sne-pulse-anim 1.5s infinite; color: #f59e0b; }
+        @keyframes sne-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .sne-mix-panel { background: #f8fafc; border: 1px solid #edf2f7; border-radius: 20px; padding: 20px; }
+        .sne-locked { opacity: 0.4; pointer-events: none; filter: grayscale(1); }
     </style>
 </head>
-<body class="pt-20 pb-0 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
-<!-- TopNavBar -->
-<nav class="bg-surface/90 fixed top-0 w-full z-[100] shadow-sm backdrop-blur-md border-b border-white/20">
-<div class="flex justify-between items-center px-6 py-5 max-w-7xl mx-auto">
-    <img src="logo1.png" alt="Naam & Banao Logo" class="h-10 w-auto object-contain">
-<div class="hidden sm:flex gap-8 items-center">
-<a class="text-primary border-b-2 border-primary font-bold pb-1 font-label-bold" href="#nb-generate-form">Generate</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="explore.html">Explore</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="#">Favorites</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="about.html">About Us</a>
-</div>
-<div class="flex items-center gap-4">
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold" href="#">Blogs</a>
-<button id="nb-hamburger-btn" class="sm:hidden text-primary p-2"><span class="material-symbols-outlined text-3xl">menu</span></button>
-</div>
-</div>
-<div id="nb-mobile-menu" class="sm:hidden bg-white flex flex-col px-6 py-4 gap-4">
-<a class="text-primary font-bold" href="#nb-generate-form">Generate</a>
-<a class="text-on-surface-variant" href="explore.html">Explore</a>
-<a class="text-on-surface-variant" href="about.html">About Us</a>
-</div>
-</nav>
+    <!-- ✅ SINGLE COMMON HEADER (Moved outside views) -->
+    <nav class="bg-surface/90 fixed top-0 w-full z-[100] shadow-sm backdrop-blur-md border-b border-white/20">
+        <div class="flex justify-between items-center px-6 py-5 max-w-7xl mx-auto">
+            <a href="#index"><img src="logo1.png" alt="Logo" class="h-10 w-auto object-contain"></a>
+            <div class="hidden sm:flex gap-8 items-center">
+                <a class="ui-nav-link font-label-bold" href="#index">Home</a>
+                <a class="ui-nav-link font-label-bold" href="#index#nb-generate-form">Generate</a>
+                <a class="ui-nav-link font-label-bold" href="#explore">Explore</a>
+                <a class="ui-nav-link font-label-bold" href="#about">About Us</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold hidden sm:block" href="#">Blogs</a>
+                <button id="nb-hamburger-btn" class="sm:hidden text-primary p-2"><span class="material-symbols-outlined text-3xl">menu</span></button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="nb-mobile-menu" class="sm:hidden bg-white flex flex-col px-6 py-4 gap-4 shadow-lg">
+            <a class="font-bold text-primary" href="#index">Home</a>
+            <a class="font-bold" href="#explore">Explore</a>
+            <a class="font-bold" href="#about">About Us</a>
+        </div>
+    </nav>
 
-<main class="flex-grow">
-<!-- Hero Section -->
-<section class="nb-bg-hero-gradient-blur relative flex items-center pt-10 pb-20 px-8 md:px-16 lg:px-24">
-<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-<div class="flex flex-col items-start space-y-8 max-w-xl lg:col-span-5">
-    <p class="text-sm md:text-base font-sans font-bold uppercase tracking-[0.3em] text-brand-teal mb-2 flex items-center gap-2">
-    <span class="material-symbols-outlined text-sm">auto_awesome</span> Ai Powered Baby Name Maker
-</p>
+    <!-- PAGE: INDEX.HTML -->
+    <div id="view-index" class="page-view active">
+        <main class="flex-grow">
+            <!-- HERO SECTION (Original) -->
+            <section class="nb-bg-hero-gradient-blur relative flex items-center pt-10 pb-20 px-8 md:px-16 lg:px-24">
+                <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    <div class="flex flex-col items-start space-y-8 max-w-xl lg:col-span-5">
+                        <p class="text-sm md:text-base font-sans font-bold uppercase tracking-[0.3em] text-brand-teal mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Ai Powered Baby Name Maker</p>
+                        <h1 style="color: #067a53; text-shadow: 2px 4px 10px rgba(23, 118, 72, 0.966);" class="text-5xl font-headline-md md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-4 tracking-wide ">Find a name they'll carry forever.</h1>
+                        <p class="text-xl font-sans text-brand-gray leading-relaxed max-w-md tracking-widest">Discover names that carry meaning, history, and a touch of magic.</p>
+                        <a href="#nb-generate-form" class="bg-brand-teal hover:bg-[#1e5445] text-white font-medium py-4 px-8 rounded-full flex items-center space-x-3 transition-colors shadow-lg nb-squishy-btn">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5z"/></svg>
+                            <span class="text-lg font-bold">Generate Names</span>
+                        </a>
+                    </div>
+                    <div class="flex justify-center w-full lg:col-span-6 lg:col-start-7"><img class="w-full max-w-lg lg:max-w-xl h-auto object-cover rounded-2xl shadow-xl" src="heroimg2.png"></div>
+                </div>
+            </section>
 
-    <!-- Shadow Preserved Exactly -->
-    <h1 style="color: #067a53; text-shadow: 2px 4px 10px rgba(23, 118, 72, 0.966);" class="text-5xl font-headline-md md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-4 tracking-wide ">
-        Find a name they'll carry forever.
-    </h1>
-
-    <p class="text-xl font-sans text-brand-gray leading-relaxed max-w-md tracking-widest">
-        Discover names that carry meaning, history, and a touch of magic. Let's start the journey together.
-    </p>
-
-    <a href="#nb-generate-form" class="bg-brand-teal hover:bg-[#1e5445] text-white font-medium py-4 px-8 rounded-full flex items-center space-x-3 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200 nb-squishy-btn">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5z"/>
-        </svg>
-        <span class="text-lg font-bold">Generate Names</span>
-    </a>
-
-</div>
-<div class="flex justify-center w-full lg:col-span-6 lg:col-start-7"><img class="w-full max-w-lg lg:max-w-xl h-auto object-cover rounded-2xl shadow-xl" src="heroimg2.png"></div>
-</div>
-</section>
-
-<!-- Mixer Section -->
+            <!-- GENERATE FORM (Original) -->
+            <section id="nb-generate-form" class="px-6 pb-24 pt-12 relative -mt-8 z-20">
+                <div class="max-w-7xl mx-auto relative">
+                    <div class="text-center mb-12 space-y-4"><h2 class="font-headline-md text-[32px] text-primary">Tell us a little more about them</h2></div>
+                    <div class="max-w-3xl mx-auto nb-glass-panel rounded-3xl p-8 md:p-12 border border-gray-200 shadow-xl">
 
 
 
 
-<!-- Mixer Section (Modified ONLY to add IDs for the API) -->
-<section id="nb-generate-form" class="px-6 pb-24 pt-12 relative -mt-8 z-20">
-<div class="max-w-7xl mx-auto relative">
-<div class="text-center mb-12 space-y-4"><h2 class="font-headline-md text-[32px] text-primary">Tell us a little more about them</h2><p class="font-body-md text-on-surface-variant text-lg">Create a unique name by mixing yours.</p></div>
-<div class="max-w-3xl mx-auto nb-glass-panel rounded-3xl p-8 md:p-12 nb-hover-lift relative overflow-hidden border border-gray-200 shadow-xl">
-<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-200 via-blue-200 to-amber-200 opacity-60"></div>
-<form id="nb-generator-form-logic" class="space-y-10 relative z-10">
-<div class="space-y-4">
-<label class="block font-label-bold text-on-surface-variant text-center">I'm looking for a...</label>
-<div class="flex gap-4 p-1.5 bg-gray-100 rounded-full max-w-md mx-auto">
-<label class="flex-1 cursor-pointer"><input checked="" class="peer sr-only" name="mixer-gender" type="radio" value="Girl"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Girl</div></label>
-<label class="flex-1 cursor-pointer"><input class="peer sr-only" name="mixer-gender" type="radio" value="Boy"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Boy</div></label>
-<label class="flex-1 cursor-pointer"><input class="peer sr-only" name="mixer-gender" type="radio" value="Any"><div class="text-center py-3 rounded-full font-label-bold peer-checked:bg-white peer-checked:text-primary transition-all">Any</div></label>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Origin / Type</label>
-<select id="nb-origin-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 appearance-none cursor-pointer"><option value="Any">Any Origin</option><option value="Hindu">Hindu</option><option value="Muslim">Muslim</option><option value="Sikh">Sikh</option><option value="Christian">Christian</option></select></div>
-<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Style</label>
-<select id="nb-style-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 appearance-none cursor-pointer"><option value="Any">Any Style</option><option value="Unique">Unique</option><option value="Traditional">Traditional</option><option value="Classic">Classic</option><option value="Modern">Modern</option></select></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="md:col-span-2 space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">Desired Meaning</label><input id="nb-meaning-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40" placeholder="e.g. Brave, Peaceful, Light" type="text"></div>
-<div class="space-y-2"><label class="block font-label-bold text-on-surface-variant pl-4">First Letter</label><input id="nb-letter-input" class="w-full rounded-2xl border-0 bg-white/80 px-6 py-4 shadow-inner focus:ring-2 focus:ring-secondary/40 text-center" maxlength="1" placeholder="A-Z" type="text"></div>
-</div>
-<div class="bg-white/40 p-6 rounded-3xl border border-white/60 space-y-6">
-<div class="flex items-center justify-between"><div class="flex items-center gap-3"><label class="font-headline-md text-xl text-on-surface">Blend Parent Names?</label></div><div class="relative inline-block w-12 mr-2 select-none"><input class="nb-toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" id="blend-toggle" type="checkbox"><label class="nb-toggle-label block h-6 rounded-full bg-gray-300 cursor-pointer" for="blend-toggle"></label></div></div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-<input id="nb-parent1-input" class="w-full rounded-2xl border-0 bg-white/90 px-6 py-4 shadow-sm" placeholder="Parent 1 Name" type="text">
-<input id="nb-parent2-input" class="w-full rounded-2xl border-0 bg-white/90 px-6 py-4 shadow-sm" placeholder="Parent 2 Name" type="text">
-</div>
-</div>
-<button id="nb-generate-btn" class="w-full bg-secondary text-white py-5 rounded-full font-label-bold text-xl nb-hover-lift nb-squishy-btn shadow-lg" type="submit">Discover Names</button>
-</form>
 
-<!-- NEW: RESULTS AREA (Hidden by default, matches your design) -->
-<div id="nb-results-section" class="hidden mt-12 pt-10 border-t border-gray-100">
-    <h3 class="font-headline-md text-2xl text-primary mb-6 text-center">Suggestions for You</h3>
-    <div id="nb-results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Cards will appear here -->
+<div id="sne-main-wrapper" class="sne-scope">
+   
+
+    <div class="sne-card">
+        <div class="sne-header" style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: #1e293b; margin: 0;">Smart Name Engine</h2>
+            <p id="sne-sync-label" class="sne-sync-status sne-pulse">Initializing Database...</p>
+        </div>
+
+        <form id="sne-engine-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Gender -->
+            <div style="display: flex; gap: 10px; background: #f1f5f9; padding: 6px; border-radius: 14px;">
+                <label style="flex: 1; text-align: center; cursor: pointer;">
+                    <input type="radio" name="sne-gender" value="Girl" checked style="display:none;" class="sne-peer">
+                    <div style="padding: 10px; border-radius: 10px; font-weight: 700; font-size: 13px; transition: 0.3s; color: #94a3b8;" class="sne-gen-btn">Girl</div>
+                </label>
+                <label style="flex: 1; text-align: center; cursor: pointer;">
+                    <input type="radio" name="sne-gender" value="Boy" style="display:none;" class="sne-peer">
+                    <div style="padding: 10px; border-radius: 10px; font-weight: 700; font-size: 13px; transition: 0.3s; color: #94a3b8;" class="sne-gen-btn">Boy</div>
+                </label>
+            </div>
+            <style>
+                .sne-peer:checked + .sne-gen-btn { background: white; color: var(--sne-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            </style>
+
+            <!-- Filters -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <label style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-left: 4px;">Starting Letter *</label>
+                    <select id="sne-letter-select" class="sne-input" style="font-weight: 700;"></select>
+                </div>
+                <div>
+                    <label style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-left: 4px;">Origin</label>
+                    <select id="sne-origin-select" class="sne-input">
+                        <option value="Any">All Styles</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Muslim">Muslim</option>
+                        <option value="Sikh">Sikh</option>
+                        <option value="Christian">Christian</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Parents Mix -->
+            <div class="sne-mix-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase;">Mix Parent Names</span>
+                    <input type="checkbox" id="sne-mix-toggle" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--sne-primary);">
+                </div>
+                <div id="sne-mix-inputs" class="sne-locked" style="display: flex; flex-direction: column; gap: 10px;">
+                    <input id="sne-f-name" class="sne-input" placeholder="Father's Name" type="text">
+                    <input id="sne-m-name" class="sne-input" placeholder="Mother's Name" type="text">
+                </div>
+            </div>
+
+            <button id="sne-submit-btn" type="submit" disabled class="sne-btn-main">Syncing Engine...</button>
+        </form>
+
+        <!-- AI Simulation View -->
+        <div id="sne-ai-loader" class="sne-ai-loader">
+            <div class="sne-spinner"></div>
+            <p id="sne-ai-msg" style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">AI is analyzing database...</p>
+        </div>
+
+        <!-- Results View -->
+        <div id="sne-results-area" style="display: none; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #f1f5f9;">
+            <div id="sne-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem;"></div>
+            <button id="sne-more-btn" style="display: none; width: 100%; margin-top: 2rem; padding: 12px; background: transparent; border: 2px dashed #e2e8f0; border-radius: 12px; color: #94a3b8; font-weight: 700; font-size: 11px; text-transform: uppercase; cursor: pointer;">Load More Suggestions</button>
+        </div>
     </div>
 </div>
 
-</div></div></section>
+<iframe id="sne-db-bridge" src="https://mywebsitenamegendatabase.blogspot.com/" style="display:none"></iframe>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </section>
 
 
 
@@ -172,7 +256,38 @@
 
 
 
-<!-- Trending Names -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- TRENDING & EXPLORE (Original) -->
+          <!-- Trending Names -->
 <section class="px-6 py-24 bg-gradient-to-b bg-gray-100 from-surface to-surface-container-low">
 <div class="max-w-7xl mx-auto">
 <h2 class="font-headline-md text-3xl text-primary mb-10">Trending Names</h2>
@@ -183,19 +298,22 @@
 <div class="bg-white rounded-3xl p-8 nb-ambient-shadow nb-hover-lift border border-gray-100"><div class="font-headline-md text-2xl text-on-surface mb-2">Felix</div><div class="font-body-md text-gray-500 mb-6 italic">"Lucky"</div><div class="flex gap-2"><span class="bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full text-xs font-label-bold">Latin</span></div></div>
 </div></div></section>
 
-<!-- Quick Explore -->
+
 <section class="px-6 py-20 bg-surface">
 <div class="max-w-7xl mx-auto text-center"><h2 class="font-headline-md text-[32px] text-primary mb-12">Quick Explore</h2>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">star</span><span class="font-label-bold">Popular Indian Names</span></a>
-<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">menu_book</span><span class="font-label-bold">Names by Meaning</span></a>
-<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">brightness_4</span><span class="font-label-bold">Names by Rashi</span></a>
-<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#"><span class="material-symbols-outlined text-3xl text-secondary">auto_awesome</span><span class="font-label-bold">Names by Nakshatra</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#explore"><span class="material-symbols-outlined text-3xl text-secondary">star</span><span class="font-label-bold">Popular Indian Names</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#explore"><span class="material-symbols-outlined text-3xl text-secondary">menu_book</span><span class="font-label-bold">Names by Meaning</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#explore"><span class="material-symbols-outlined text-3xl text-secondary">brightness_4</span><span class="font-label-bold">Names by Rashi</span></a>
+<a class="bg-gray-100 hover:bg-teal-50 p-6 rounded-3xl flex flex-col items-center gap-3 transition-all nb-hover-lift border border-gray-100 group" href="#explore"><span class="material-symbols-outlined text-3xl text-secondary">auto_awesome</span><span class="font-label-bold">Names by Nakshatra</span></a>
 </div>
-<a href="explore.html" class="inline-flex items-center gap-2 bg-secondary/10 text-secondary hover:bg-secondary hover:text-white px-8 py-4 rounded-full font-label-bold transition-all nb-hover-lift">
+<a href="#explore" class="inline-flex items-center gap-2 bg-secondary/10 text-secondary hover:bg-secondary hover:text-white px-8 py-4 rounded-full font-label-bold transition-all nb-hover-lift">
     View All Categories <span class="material-symbols-outlined">arrow_forward</span>
 </a>
 </div></section>
+
+
+
 
 <!-- Final CTA -->
 <section class="px-6 py-24 relative overflow-hidden">
@@ -205,51 +323,515 @@
 <a href="#nb-generate-form" class="bg-primary text-white py-4 px-10 rounded-full font-label-bold text-xl nb-hover-lift nb-squishy-btn inline-flex items-center gap-2">Generate Now <span class="material-symbols-outlined">arrow_forward</span></a>
 </div></section>
 
+
+        </main>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="view-about" class="page-view">
+
+        
+    <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <!-- Hero Content -->
+        <div class="max-w-4xl mx-auto text-center space-y-8 mb-24">
+            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold tracking-wide uppercase">
+                <span class="material-symbols-outlined text-sm">info</span> Our Journey
+            </div>
+            <h1 class="text-5xl md:text-6xl font-headline-md text-brand-dark leading-tight">A Name for Every Story</h1>
+            <p class="text-xl text-gray-600 leading-relaxed font-light">
+                At Naam & Banao, we understand that naming a child is the first profound act of love a parent performs. We simplify the journey without losing cultural depth.
+            </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-2 gap-8 mb-24">
+            <div class="ui-hover-card bg-white p-10 rounded-[2.5rem] space-y-5">
+                <div class="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-3xl">psychology</span>
+                </div>
+                <h2 class="text-2xl font-bold text-brand-teal">Our Technology</h2>
+                <p class="text-gray-500 leading-relaxed">We utilize advanced linguistic patterns to help parents blend their names, creating a modern connection while maintaining traditional roots. Every meaning is meticulously verified.</p>
+            </div>
+            
+            <div class="ui-hover-card bg-white p-10 rounded-[2.5rem] space-y-5">
+                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600">
+                    <span class="material-symbols-outlined text-3xl">visibility</span>
+                </div>
+                <h2 class="text-2xl font-bold text-brand-teal">Our Vision</h2>
+                <p class="text-gray-500 leading-relaxed">We aim to be the digital companion for new families globally, starting with a focus on rich Indian heritage and expanding to every corner of the world.</p>
+            </div>
+        </div>
+
+        <!-- Functional Bottom Card -->
+        <div class="relative overflow-hidden bg-brand-dark rounded-[3.5rem] p-12 md:p-20 text-center shadow-2xl">
+            <!-- Decorative circle -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 space-y-8">
+                <h2 class="text-4xl md:text-5xl font-headline-md text-white">Start your search today</h2>
+                <p class="text-teal-100/70 text-lg max-w-xl mx-auto font-light">Discover names by Rashi, Nakshatra, Style, or mix your own names with our AI tool.</p>
+                
+                <div class="flex flex-wrap justify-center gap-5 pt-4">
+                    <a href="explore.html" class="bg-white text-brand-dark px-10 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition-all flex items-center gap-2">
+                        Explore Collections <span class="material-symbols-outlined">explore</span>
+                    </a>
+                    <a href="#index#nb-generate-form" class="bg-primary text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-brand-teal transition-all flex items-center gap-2 border border-white/10">
+                        Try Name Mixer <span class="material-symbols-outlined">auto_awesome</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+
+
+
+
+
+<!-- explore page  -->
+        
+<div id="view-explore" class="page-view">
+    <main class="max-w-7xl mx-auto px-6 py-6">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <aside class="lg:w-1/4 space-y-4 lg:sticky lg:top-28 h-fit">
+                <div class="relative">
+                    <input type="text" id="ks-search-input" onkeyup="ksDir_masterFilter(true)" placeholder="Search names..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border-gray-200 focus:ring-ks-primary shadow-sm border text-sm">
+                    <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-xl">search</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-100">
+                    <h3 class="font-bold text-gray-400 mb-3 text-[10px] uppercase tracking-widest">Alphabet</h3>
+                    <div class="ks-alpha-grid" id="ks-alpha-container">
+                        <button class="ks-alpha-btn ks-filter-active" onclick="ksDir_setAlpha('All', this)">All</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 text-sm">
+                    <h3 class="font-bold text-gray-700 mb-2">Rashi</h3>
+                    <select id="ks-rashi-select" onchange="ksDir_masterFilter(true)" class="w-full rounded-lg border-gray-200 text-sm focus:ring-ks-primary py-2">
+                        <option value="All">All Rashis</option>
+                        <option value="Mesha">Mesha (A, L, E)</option>
+                        <option value="Vrishabha">Vrishabha (B, V, U)</option>
+                        <option value="Mithuna">Mithuna (K, CH, G)</option>
+                        <option value="Karka">Karka (D, H)</option>
+                    </select>
+                </div>
+            </aside>
+
+            <div class="lg:w-3/4">
+                <div class="mb-4 flex flex-wrap justify-between items-center bg-white px-5 py-3 rounded-xl border border-gray-100 shadow-sm gap-4">
+                    <span id="ks-count-label" class="font-bold text-ks-primary text-[10px] tracking-widest uppercase">0 Names Found</span>
+                    <div class="flex bg-gray-100 p-1 rounded-lg">
+                        <button onclick="ksDir_setGender('All', this)" class="ks-gender-btn px-4 py-1 rounded-md text-[11px] font-bold ks-filter-active">All</button>
+                        <button onclick="ksDir_setGender('Boy', this)" class="ks-gender-btn px-4 py-1 rounded-md text-[11px] font-bold">Boy</button>
+                        <button onclick="ksDir_setGender('Girl', this)" class="ks-gender-btn px-4 py-1 rounded-md text-[11px] font-bold">Girl</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4" id="ks-names-wrapper"></div>
+
+                <div class="mt-10 text-center" id="ks-pagination">
+                    <button onclick="ksDir_loadMore()" class="bg-ks-primary text-white px-8 py-3 rounded-full font-bold hover:bg-ks-dark transition-all text-sm flex items-center gap-2 mx-auto">
+                        Load More Names <span class="material-symbols-outlined text-sm">expand_more</span>
+                    </button>
+                </div>
+
+                <div id="ks-empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-gray-200">
+                    <p class="text-gray-400 font-medium">No names found matching your criteria.</p>
+                    <button onclick="ksDir_clearAll()" class="text-ks-primary font-bold text-sm mt-2 underline">Reset Filters</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
 <footer class="bg-gray-100 w-full rounded-t-xl mt-8">
 <div class="flex flex-col md:flex-row justify-between items-center px-6 py-8 max-w-7xl mx-auto">
 <div class="font-headline-md text-primary text-xl">Lullaby &amp; Letter</div>
 <div class="flex gap-8"><a class="text-gray-500 hover:text-secondary font-label-bold" href="about.html">About Us</a><a class="text-gray-500 hover:text-secondary font-label-bold" href="explore.html">Explore</a><a class="text-gray-500 hover:text-secondary font-label-bold" href="#">Instagram</a></div>
 <div class="font-body-md text-gray-400">© 2024 Lullaby &amp; Letter</div>
 </div></footer>
-</main>
 
-<script>
-    const nbBtn = document.getElementById('nb-hamburger-btn');
-    const nbMenu = document.getElementById('nb-mobile-menu');
-    nbBtn.addEventListener('click', () => {
-        nbMenu.classList.toggle('active');
-        nbBtn.querySelector('span').textContent = nbMenu.classList.contains('active') ? 'close' : 'menu';
+    <script>
+
+
+
+
+
+
+
+
+
+
+// --- 1. PAGE ROUTING LOGIC (Aapka Purana Code) ---
+function navigate() {
+    const hash = window.location.hash || '#index';
+    
+    // Handle scrolling inside index (for Generate form)
+    if (hash.includes('#nb-')) {
+        const targetId = hash.split('#').pop();
+        document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+        document.getElementById('view-index').classList.add('active');
+        setTimeout(() => {
+            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        return;
+    }
+
+    const pageId = 'view-' + hash.replace('#', '').split('?')[0];
+    const targetView = document.getElementById(pageId);
+    
+    if (targetView) {
+        document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+        targetView.classList.add('active');
+        window.scrollTo(0, 0);
+
+        // Update Header Links UI
+        document.querySelectorAll('.ui-nav-link').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === hash);
+        });
+    }
+    // Close mobile menu
+    document.getElementById('nb-mobile-menu').classList.remove('active');
+}
+
+window.addEventListener('hashchange', navigate);
+
+// Hamburger menu toggle
+document.getElementById('nb-hamburger-btn').onclick = () => {
+    document.getElementById('nb-mobile-menu').classList.toggle('active');
+};
+
+
+// --- 2. EXPLORE PAGE LOGIC (Naya Fixed Code) ---
+
+const ksDir_Database = [
+    { n: "Aarav", m: "Peaceful; Wisdom", g: "Boy", r: "Mesha" },
+    { n: "Ananya", m: "Unique; Peerless", g: "Girl", r: "Mesha" },
+    { n: "Bhavin", m: "Winner; Illustrious", g: "Boy", r: "Vrishabha" },
+    { n: "Diya", m: "Light; Brilliance", g: "Girl", r: "Karka" },
+    { n: "Ishani", m: "Goddess Parvati", g: "Girl", r: "Mesha" },
+    { n: "Kabir", m: "Great; Famous saint", g: "Boy", r: "Mithuna" },
+    { n: "Myra", m: "Beloved; Sacred", g: "Girl", r: "Simha" },
+    { n: "Reyansh", m: "Part of Lord Vishnu", g: "Boy", r: "Tula" },
+    { n: "Saanvi", m: "Goddess Lakshmi", g: "Girl", r: "Kumbha" },
+    { n: "Vihaan", m: "Dawn; New Era", g: "Boy", r: "Vrishabha" },
+    { n: "Aditya", m: "The Sun", g: "Boy", r: "Mesha" },
+    { n: "Kiara", m: "Dark-haired; Gift", g: "Girl", r: "Mithuna" },
+    { n: "Arjun", m: "Bright; Shining", g: "Boy", r: "Mesha" },
+    { n: "Zoya", m: "Alive; Loving", g: "Girl", r: "Meena" },
+    { n: "Rohan", m: "Ascending", g: "Boy", r: "Tula" },
+    { n: "Navya", m: "New; Modern", g: "Girl", r: "Vrishabha" }
+];
+
+let ksDir_Alpha = 'All';
+let ksDir_Gender = 'All';
+let ksDir_Limit = 12; // Initially 12
+let ksDir_Filtered = [...ksDir_Database];
+
+function ksDir_masterFilter(resetLimit = false) {
+    if (resetLimit) ksDir_Limit = 12;
+    
+    const searchVal = document.getElementById('ks-search-input')?.value.toLowerCase() || "";
+    const rashiVal = document.getElementById('ks-rashi-select')?.value || "All";
+
+    ksDir_Filtered = ksDir_Database.filter(item => {
+        const s = !searchVal || item.n.toLowerCase().includes(searchVal);
+        const a = ksDir_Alpha === 'All' || item.n.startsWith(ksDir_Alpha);
+        const g = ksDir_Gender === 'All' || item.g === ksDir_Gender;
+        const r = rashiVal === 'All' || item.r === rashiVal;
+        return s && a && g && r;
+    });
+    ksDir_render();
+}
+
+function ksDir_render() {
+    const wrap = document.getElementById('ks-names-wrapper');
+    if (!wrap) return;
+    
+    wrap.innerHTML = '';
+    const list = ksDir_Filtered.slice(0, ksDir_Limit);
+
+    list.forEach(item => {
+        wrap.innerHTML += `
+            <div class="ks-name-card p-5 rounded-2xl flex flex-col justify-between border shadow-sm">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-500 uppercase">${item.g}</span>
+                        <span class="material-symbols-outlined text-gray-300 text-xl">favorite</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-1">${item.n}</h3>
+                    <p class="text-gray-500 text-xs">${item.m}</p>
+                </div>
+            </div>`;
     });
 
-
-
-
-
-
-
+    // Pagination visibility
+    const pagin = document.getElementById('ks-pagination');
+    if (pagin) {
+        pagin.classList.toggle('hidden', ksDir_Limit >= ksDir_Filtered.length);
+    }
     
-/**
- * NAAM & BANAO - API LOGIC
- * Using Gemini 1.5 Flash (Free Tier)
- */
+    const countLabel = document.getElementById('ks-count-label');
+    if (countLabel) countLabel.innerText = `${ksDir_Filtered.length} Names Found`;
+}
+
+function ksDir_loadMore() {
+    ksDir_Limit += 12;
+    ksDir_render();
+}
+
+function ksDir_setAlpha(val, btn) {
+    ksDir_Alpha = val;
+    document.querySelectorAll('.ks-alpha-btn').forEach(b => b.classList.remove('ks-filter-active'));
+    btn.classList.add('ks-filter-active');
+    ksDir_masterFilter(true);
+}
+
+function ksDir_setGender(val, btn) {
+    ksDir_Gender = val;
+    document.querySelectorAll('.ks-gender-btn').forEach(b => b.classList.remove('ks-filter-active'));
+    btn.classList.add('ks-filter-active');
+    ksDir_masterFilter(true);
+}
+
+// --- 3. INITIALIZATION (Runs everything on load) ---
+window.addEventListener('DOMContentLoaded', () => {
+    // Run Router
+    navigate();
+
+    // Setup Alpha Buttons
+    const alphaContainer = document.getElementById('ks-alpha-container');
+    if (alphaContainer) {
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(l => {
+            const b = document.createElement('button');
+            b.className = 'ks-alpha-btn'; b.innerText = l;
+            b.onclick = () => ksDir_setAlpha(l, b);
+            alphaContainer.appendChild(b);
+        });
+    }
+
+    // Load initial names immediately
+    ksDir_masterFilter();
+});
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <!-- Smart Name Engine (SNE) Container -->
+
+
+// <script>
+    // Encapsulated SNE Engine
+    const SNE_Engine = {
+        fullDB: [],
+        filtered: [],
+        limit: 10,
+        syncTask: null,
+        hiMap: {'अ':'a','आ':'a','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ए':'e','ऐ':'ai','ओ':'o','औ':'au','क':'k','ख':'kh','ग':'g','gh':'gh','च':'ch','छ':'chh','ज':'j','झ':'jh','ट':'t','ठ':'th','ड':'d','ढ':'dh','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','ा':'a','ि':'i','ी':'ee','ु':'u','ू':'oo','े':'e','ै':'ai','ो':'o','ौ':'au','्':''},
+
+        init: function() {
+            this.dom();
+            this.bind();
+            this.startSync();
+        },
+
+        dom: function() {
+            this.el = {
+                status: document.getElementById('sne-sync-label'),
+                form: document.getElementById('sne-engine-form'),
+                btn: document.getElementById('sne-submit-btn'),
+                letter: document.getElementById('sne-letter-select'),
+                mixToggle: document.getElementById('sne-mix-toggle'),
+                mixPanel: document.getElementById('sne-mix-inputs'),
+                aiBox: document.getElementById('sne-ai-loader'),
+                aiMsg: document.getElementById('sne-ai-msg'),
+                resArea: document.getElementById('sne-results-area'),
+                grid: document.getElementById('sne-results-grid'),
+                more: document.getElementById('sne-more-btn'),
+                bridge: document.getElementById('sne-db-bridge')
+            };
+            // Populate A-Z
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+                let o = document.createElement('option'); o.value = l; o.innerText = l;
+                this.el.letter.appendChild(o);
+            });
+        },
+
+        bind: function() {
+            window.addEventListener('message', (e) => {
+                if (Array.isArray(e.data)) this.onData(e.data);
+            });
+            this.el.mixToggle.onchange = (e) => this.el.mixPanel.classList.toggle('sne-locked', !e.target.checked);
+            this.el.form.onsubmit = (e) => { e.preventDefault(); this.handleSearch(); };
+            this.el.more.onclick = () => { this.limit += 10; this.render(); };
+        },
+
+        startSync: function() {
+            this.syncTask = setInterval(() => {
+                if (this.el.bridge.contentWindow) this.el.bridge.contentWindow.postMessage("get", "*");
+            }, 2000);
+        },
+
+        onData: function(data) {
+            this.fullDB = data;
+            clearInterval(this.syncTask);
+            this.el.status.innerText = "● AI Engine Online";
+            this.el.status.className = "sne-sync-status";
+            this.el.status.style.color = "#10b981";
+            this.el.btn.disabled = false;
+            this.el.btn.innerText = "Discover Names";
+        },
+
+        transliterate: function(text) {
+            if (!/[\u0900-\u097F]/.test(text)) return text.toLowerCase();
+            return text.split('').map(char => this.hiMap[char] || char).join('').toLowerCase();
+        },
+
+        handleSearch: function() {
+            const letter = this.el.letter.value;
+            if (!letter) { alert("⚠️ Select a letter first!"); return; }
+
+            // Visual Reset
+            this.el.resArea.style.display = 'none';
+            this.el.aiBox.style.display = 'block';
+            this.el.btn.disabled = true;
+
+            const aiSteps = ["Analyzing Phonetics...", "Synthesizing Patterns...", "Applying 4-Way Mix...", "Finalizing Database Match..."];
+            let stepIdx = 0;
+            const timer = setInterval(() => {
+                this.el.aiMsg.innerText = aiSteps[stepIdx % aiSteps.length];
+                stepIdx++;
+            }, 600);
+
+            setTimeout(() => {
+                clearInterval(timer);
+                this.executeLogic();
+                this.el.aiBox.style.display = 'none';
+                this.el.resArea.style.display = 'block';
+                this.el.btn.disabled = false;
+                this.el.resArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 2500);
+        },
+
+        executeLogic: function() {
+            const letter = this.el.letter.value;
+            const isMix = this.el.mixToggle.checked;
+            const f = this.transliterate(document.getElementById('sne-f-name').value.trim());
+            const m = this.transliterate(document.getElementById('sne-m-name').value.trim());
+            const gender = document.querySelector('input[name="sne-gender"]:checked').value;
+            const origin = document.getElementById('sne-origin-select').value;
+
+            this.filtered = this.fullDB.filter(item => {
+                const dbName = item.name.toLowerCase();
+                if (isMix && (dbName === f || dbName === m)) return false;
+                if (gender !== "Any" && item.gender !== gender && item.gender !== "Any") return false;
+                if (origin !== "Any" && item.origin !== origin) return false;
+                if (item.letter !== letter) return false;
+
+                if (isMix && (f || m)) {
+                    const fPre = f.substring(0, 2), fSuf = f.slice(-2);
+                    const mPre = m.substring(0, 2), mSuf = m.slice(-2);
+                    const pattern = (dbName.includes(fPre) && dbName.includes(mSuf)) ||
+                                    (dbName.includes(fSuf) && dbName.includes(mPre)) ||
+                                    (dbName.includes(fPre) && dbName.includes(mPre)) ||
+                                    (dbName.includes(fSuf) && dbName.includes(mSuf));
+                    let vibe = 0;
+                    for(let c of (f + m)) { if(dbName.includes(c)) vibe++; }
+                    return (pattern || vibe >= 3);
+                }
+                return true;
+            });
+
+            this.limit = 10;
+            this.render();
+        },
+
+        render: function() {
+            this.el.grid.innerHTML = "";
+            const visible = this.filtered.slice(0, this.limit);
+
+            if (visible.length === 0) {
+                this.el.grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #94a3b8; font-style: italic;">No perfect AI matches found. Try another letter or origin.</div>`;
+                this.el.more.style.display = 'none';
+                return;
+            }
+
+            visible.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "sne-result-card";
+                card.innerHTML = `
+                    <div class="sne-name-header">
+                        <h3 class="sne-res-name">${item.name}</h3>
+                        <span class="sne-tag sne-tag-origin">${item.origin}</span>
+                    </div>
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">${item.gender} • ${item.style || 'Classic'}</span>
+                    </div>
+                    <div class="sne-res-meaning">"${item.meaning}"</div>
+                `;
+                this.el.grid.appendChild(card);
+            });
+
+            this.el.more.style.display = this.filtered.length > this.limit ? 'block' : 'none';
+            if(this.el.more.style.display === 'block') {
+                this.el.more.innerText = `View ${this.filtered.length - this.limit} More AI Suggestions`;
+            }
+        }
+    };
+
+    // Start Engine
+    SNE_Engine.init();
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body></html>
+    </script>
+</body>
+</html>
